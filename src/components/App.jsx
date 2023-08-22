@@ -1,69 +1,61 @@
 import React, { useEffect, useState, useRef } from 'react';
-import NoTodos from './NoTodos';
-import TodoForm from './TodoForm';
-import TodoList from './TodoList';
+import NoTasks from './NoTasks';
+import TaskForm from './TaskForm';
+import TaskList from './TaskList';
 import useLocalStorage from '../hooks/useLocalStorage';
 import '../reset.css';
 import '../App.css';
-import { TodosContext } from '../context/TodosContext';
+import { TasksContext } from '../context/TasksContext';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 function App() {
   const [name, setName] = useLocalStorage('name', '');
 
   const nameInputEl = useRef(null);
-  const [todos, setTodos] = useLocalStorage('todos', []);
+  const [tasks, setTasks] = useLocalStorage('tasks', []);
 
-  const [idForTodo, setIdForTodo] = useLocalStorage('idForTodo', 1);
+  const [idForTask, setIdForTask] = useLocalStorage('idForTask', 1);
 
   const [filter, setFilter] = useState('all');
 
-  function todosFiltered() {
+  function tasksFiltered() {
     if (filter === 'all') {
-      return todos;
+      return tasks;
     } else if (filter === 'active') {
-      return todos.filter(todo => !todo.isComplete);
+      return tasks.filter(task => !task.isComplete);
     } else if (filter === 'completed') {
-      return todos.filter(todo => todo.isComplete);
+      return tasks.filter(task => task.isComplete);
     }
   }
 
   useEffect(() => {
-    // console.log('use effect running');
     nameInputEl.current.focus();
-
-    // setName(JSON.parse(localStorage.getItem('name')) ?? '');
-
-    return function cleanup() {
-      // console.log('cleaning up');
-    };
   }, []);
 
   function handleNameInput(event) {
     setName(event.target.value);
-    // localStorage.setItem('name', JSON.stringify(event.target.value));
   }
 
   return (
-    <TodosContext.Provider
+    <TasksContext.Provider
       value={{
-        todos,
-        setTodos,
-        idForTodo,
-        setIdForTodo,
-        todosFiltered,
+        tasks,
+        setTasks,
+        idForTask,
+        setIdForTask,
+        tasksFiltered,
         filter,
         setFilter,
       }}
     >
-      <div className="todo-app">
+      <div className="task-app">
         <div className="name-container">
           <h2>What is your name?</h2>
           <form action="#">
             <input
               type="text"
               ref={nameInputEl}
-              className="todo-input"
+              className="task-input"
               placeholder="What is your name"
               value={name}
               onChange={handleNameInput}
@@ -79,39 +71,21 @@ function App() {
             <p className="name-label">Hello, {name}</p>
           </CSSTransition>
         </div>
-        <h2>Todo App</h2>
-        <TodoForm />
+        <h2>Task App</h2>
+        <TaskForm />
 
         <SwitchTransition mode="out-in">
           <CSSTransition
-            key={todos.length > 0}
+            key={tasks.length > 0}
             timeout={300}
             classNames="slide-vertical"
             unmountOnExit
           >
-            {todos.length > 0 ? <TodoList /> : <NoTodos />}
+            {tasks.length > 0 ? <TaskList /> : <NoTasks />}
           </CSSTransition>
         </SwitchTransition>
-
-        {/* <CSSTransition
-            in={todos.length > 0}
-            timeout={300}
-            classNames="slide-vertical"
-            unmountOnExit
-          >
-            <TodoList />
-          </CSSTransition>
-
-          <CSSTransition
-            in={todos.length === 0}
-            timeout={300}
-            classNames="slide-vertical"
-            unmountOnExit
-          >
-            <NoTodos />
-          </CSSTransition> */}
       </div>
-    </TodosContext.Provider>
+    </TasksContext.Provider>
   );
 }
 

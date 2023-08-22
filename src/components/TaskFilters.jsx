@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
-import { TodosContext } from '../context/TodosContext';
+import { TasksContext } from '../context/TasksContext';
 
-function TodoFilters() {
-  const { filter, setFilter, todosFiltered } = useContext(TodosContext);
+function TaskFilters() {
+  const { filter, setFilter, tasksFiltered } = useContext(TasksContext);
 
   return (
     <div>
       <button
         onClick={() => {
           setFilter('all');
-          todosFiltered();
+          tasksFiltered();
         }}
         className={`button filter-button ${
           filter === 'all' ? 'filter-button-active' : ''
@@ -20,7 +20,7 @@ function TodoFilters() {
       <button
         onClick={() => {
           setFilter('active');
-          todosFiltered();
+          tasksFiltered();
         }}
         className={`button filter-button ${
           filter === 'active' ? 'filter-button-active' : ''
@@ -31,7 +31,7 @@ function TodoFilters() {
       <button
         onClick={() => {
           setFilter('completed');
-          todosFiltered();
+          tasksFiltered();
         }}
         className={`button filter-button ${
           filter === 'completed' ? 'filter-button-active' : ''
@@ -43,4 +43,4 @@ function TodoFilters() {
   );
 }
 
-export default TodoFilters;
+export default TaskFilters;

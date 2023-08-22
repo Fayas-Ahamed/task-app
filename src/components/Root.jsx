@@ -9,26 +9,13 @@ import BlogPost from './pages/BlogPost';
 import NoMatch from './pages/NoMatch';
 
 export default function Root() {
-  const routes = [
-    { path: '/', name: 'Home', Component: App, exact: true },
-    { path: '/about', name: 'About', Component: About, exact: false },
-    { path: '/contact', name: 'Contact', Component: Contact, exact: false },
-    { path: '/blog', name: 'Blog', Component: Blog, exact: true },
-    { path: '/blog/:id', name: 'Post', Component: BlogPost, exact: false },
-    { path: '*', name: 'No Match', Component: NoMatch, exact: false },
-  ];
-
+  
   return (
     <Router>
-      <div className="todo-app-container">
+      <div className="task-app-container">
         <NavigationBar />
         <div className="content">
           <Switch>
-            {/* {routes.map(({ path, Component, exact }) => (
-              <Route key={path} path={path} exact={exact}>
-                <Component />
-              </Route>
-            ))} */}
             <Route exact path="/">
               <App />
             </Route>

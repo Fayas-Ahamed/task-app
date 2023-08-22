@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function NoTodos() {
+export default function NoTasks() {
   return (
-    <div className="no-todos-container">
+    <div className="no-tasks-container">
       <svg
         width="247"
         height="241"
@@ -57,7 +57,7 @@ export default function NoTodos() {
           </clipPath>
         </defs>
       </svg>
-      <p>Add some todos...</p>
+      <p>Add some tasks...</p>
     </div>
   );
 }
