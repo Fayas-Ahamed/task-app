@@ -4,11 +4,11 @@ import TaskForm from './TaskForm';
 import TaskList from './TaskList';
 import useLocalStorage from '../hooks/useLocalStorage';
 import '../reset.css';
-import '../App.css';
+import '../TaskApp.css';
 import { TasksContext } from '../context/TasksContext';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
-function App() {
+function TaskApp() {
   const [name, setName] = useLocalStorage('name', '');
 
   const nameInputEl = useRef(null);
@@ -89,4 +89,4 @@ function App() {
   );
 }
 
-export default App;
+export default TaskApp;

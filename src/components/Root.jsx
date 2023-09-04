@@ -1,12 +1,12 @@
 import React from 'react';
-import App from './App';
+import TaskApp from './TaskApp';
 import NavigationBar from './NavigationBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import NoMatch from './pages/NoMatch';
+import About from './About';
+import Contact from './Contact';
+import Blog from './Blog';
+import BlogPost from './BlogPost';
+import NoMatch from './NoMatch';
 
 export default function Root() {
   
@@ -17,7 +17,7 @@ export default function Root() {
         <div className="content">
           <Switch>
             <Route exact path="/">
-              <App />
+              <TaskApp />
             </Route>
             <Route path="/about">
               <About />
